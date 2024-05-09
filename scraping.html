@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraping Using Python with Example</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <h1>Web Scraping Using Python with Example</h1>
+            <p>Web scraping is a technique used to extract data from websites. This guide will introduce you to web scraping using Python in a simple and beginner-friendly way. By the end, you'll be able to collect data from websites using Python and the BeautifulSoup library.</p>
+
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#what-is-web-scraping">1. What is Web Scraping?</a></li>
+                <li><a href="#legal-considerations">2. Legal Considerations</a></li>
+                <li><a href="#setting-up-python">3. Setting Up Python</a></li>
+                <li><a href="#installing-libraries">4. Installing Required Libraries</a></li>
+                <li><a href="#understanding-html">5. Understanding HTML Structure</a></li>
+                <li><a href="#writing-web-scraper">6. Writing Your First Web Scraper</a></li>
+                <li><a href="#advanced-scraping">7. Advanced Web Scraping Techniques</a></li>
+                <li><a href="#conclusion">8. Conclusion</a></li>
+            </ul>
+
+            <h2 id="what-is-web-scraping">1. What is Web Scraping?</h2>
+            <p>Web scraping is the process of extracting data from websites automatically using programs called web scrapers. You can use web scraping to collect information like product prices, reviews, job listings, and much more.</p>
+
+            <h2 id="legal-considerations">2. Legal Considerations</h2>
+            <p>Before you start web scraping, it's important to consider the legal aspects:</p>
+            <ul>
+                <li>**Respect the <a href="https://www.robotstxt.org/" target="_blank">robots.txt</a> file**: This file tells web crawlers which pages are allowed or disallowed for scraping.</li>
+                <li>**Terms of Service**: Check the website's terms of service to ensure that web scraping is permitted.</li>
+                <li>**Overloading Servers**: Avoid overloading servers by making too many requests per second.</li>
+            </ul>
+
+            <h2 id="setting-up-python">3. Setting Up Python</h2>
+            <p>If you haven't already, download and install Python from <a href="https://www.python.org/downloads/" target="_blank">python.org</a>. Make sure to check the box that says "Add Python to PATH" during installation.</p>
+
+            <h2 id="installing-libraries">4. Installing Required Libraries</h2>
+            <p>To scrape websites using Python, you'll need two libraries: <code>requests</code> and <code>BeautifulSoup</code>. Install them using pip:</p>
+            <pre><code>pip install requests beautifulsoup4</code></pre>
+
+            <h2 id="understanding-html">5. Understanding HTML Structure</h2>
+            <p>To scrape data from a website, you must understand its HTML structure. For this guide, we'll scrape book titles and prices from the website <a href="http://books.toscrape.com/" target="_blank">Books to Scrape</a>. Here's how to inspect the HTML structure:</p>
+            <ul>
+                <li>**Right-click** on the page and select "Inspect" or press <code>F12</code> to open Developer Tools.</li>
+                <li>Hover over different elements to see the associated HTML code.</li>
+                <li>Identify the HTML tags that contain the data you want to scrape.</li>
+            </ul>
+            <p>In this case, book titles are inside the <code>&lt;a&gt;</code> tags, and prices are inside the <code>&lt;p class="price_color"&gt;</code> tags.</p>
+
+            <h2 id="writing-web-scraper">6. Writing Your First Web Scraper</h2>
+            <p>Here's a Python script to scrape book titles and prices from "Books to Scrape":</p>
+            <pre><code>import requests
+from bs4 import BeautifulSoup
+
+# URL of the website to scrape
+url = 'http://books.toscrape.com/'
+
+# Send a GET request to the website
+response = requests.get(url)
+
+# Parse the HTML content using BeautifulSoup
+soup = BeautifulSoup(response.content, 'html.parser')
+
+# Find all book titles and prices
+books = soup.select('article.product_pod')
+for book in books:
+    title = book.h3.a['title']
+    price = book.select_one('p.price_color').text
+    print(f'Title: {title}, Price: {price}')</code></pre>
+
+            <h2 id="advanced-scraping">7. Advanced Web Scraping Techniques</h2>
+            <p>After learning the basics, you can explore more advanced web scraping techniques:</p>
+            <ul>
+                <li><strong>Pagination:</strong> Scrape data from multiple pages.</li>
+                <li><strong>Data Storage:</strong> Save your scraped data into CSV files, databases, or JSON format.</li>
+                <li><strong>API Requests:</strong> Use APIs if available for structured data collection.</li>
+                <li><strong>Automated Scraping:</strong> Schedule your scraper using cron jobs or task schedulers.</li>
+            </ul>
+            <h3>Scraping Multiple Pages</h3>
+            <p>Here's how to scrape multiple pages using pagination:</p>
+            <pre><code>import requests
+from bs4 import BeautifulSoup
+
+# Base URL of the website to scrape
+base_url = 'http://books.toscrape.com/catalogue/page-{}.html'
+
+# Function to scrape a single page
+def scrape_page(page_number):
+    url = base_url.format(page_number)
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    books = soup.select('article.product_pod')
+    for book in books:
+        title = book.h3.a['title']
+        price = book.select_one('p.price_color').text
+        print(f'Title: {title}, Price: {price}')
+
+# Loop through multiple pages
+for page in range(1, 6):
+    scrape_page(page)</code></pre>
+
+            <h2 id="conclusion">8. Conclusion</h2>
+            <p>Web scraping with Python is an invaluable skill for collecting data from the web. Make sure to respect each website's terms of service and <a href="https://www.robotstxt.org/" target="_blank">robots.txt</a> file. Experiment with different websites and projects to improve your scraping skills!</p>
+        </article>
+    </main>
+
+    <footer>
+        <ul class="social-links">
+            <li><a href="https://github.com/your-profile" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+            <li><a href="https://linkedin.com/in/your-profile" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+            <li><a href="https://twitter.com/your-profile" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+        <p>&copy; [Your Name] 2024 | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>

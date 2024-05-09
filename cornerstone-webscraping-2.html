@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraping a Large Set of Products - Page 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="banner banner-page2">
+            <h1>Advanced Data Collection Techniques</h1>
+            <p>Diving Deeper into Web Scraping and Data Processing</p>
+        </div>
+        
+        <article class="project-article">
+            <h1>Scraping a Large Set of Products: Data Collection</h1>
+            <p>This page continues the discussion on our project involving scraping the <a href="https://www.mayesh.com/shop?perPage=100&sortBy=Name-ASC&pageNumb=1&date=&is_sales_rep=0&is_e_sales=0&criteria={}&criteriaInt={}&search=&s_search=" target="_blank">Mayesh</a> online shop. Here, we delve deeper into the data collection process and outline the initial steps of data processing.</p>
+            
+            <h2>4. Detailed Data Collection Process</h2>
+            <p>We developed a Python script using Scrapy and Selenium to navigate and extract data from product listings. Here’s a step-by-step breakdown:</p>
+            <ol>
+                <li><strong>Initialize Scrapy:</strong> Start a Scrapy Spider to crawl through the product pages.</li>
+                <li><strong>Dynamic Content Handling:</strong> Use Selenium to ensure all dynamic content is loaded, especially for JavaScript-rendered pages.</li>
+                <li><strong>Extract Data:</strong> Identify and extract the product name, price, image URL, and description using Beautiful Soup.</li>
+                <li><strong>Handle Pagination:</strong> Automatically detect and navigate to the next page of products until all products are scraped.</li>
+            </ol>
+
+            <h2>5. Data Processing</h2>
+            <p>After collecting the data, the next step is to process and clean it for analysis. This includes:</p>
+            <ul>
+                <li>Removing duplicates and irrelevant entries.</li>
+                <li>Normalizing data formats (e.g., standardizing prices to a common format).</li>
+                <li>Extracting and refining additional attributes like color or type from the product descriptions.</li>
+            </ul>
+
+            <h2>6. Challenges and Solutions</h2>
+            <p>During data collection, we encountered several challenges:</p>
+            <ul>
+                <li><strong>Rate Limiting:</strong> To avoid being blocked by the website, we implemented polite scraping practices with delays and retries.</li>
+                <li><strong>Dynamic Content:</strong> Some product details were loaded asynchronously. We used Selenium to wait until the necessary elements were fully loaded.</li>
+                <li><strong>Data Quality:</strong> We wrote additional functions to clean and verify the integrity of the scraped data.</li>
+            </ul>
+
+            <nav class="pagination">
+                <a href="cornerstone-webscraping-1.html">&laquo; Previous</a>
+                <a href="cornerstone-webscraping-3.html">Next &raquo;</a>
+            </nav>
+        </article>
+    </main>
+
+    <footer>
+        <ul class="social-links">
+            <li><a href="https://github.com/your-profile" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+            <li><a href="https://linkedin.com/in/your-profile" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+            <li><a href="https://twitter.com/your-profile" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+        <p>© [Your Name] 2024 | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

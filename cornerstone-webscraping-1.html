@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraping a Large Set of Products - Page 1</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="banner">
+            <h1>Scraping a Large Set of Products</h1>
+            <p>Automated Data Collection from Mayesh’s Online Flower Shop</p>
+        </div>
+
+        <article class="project-article">
+            <p>This project involves scraping an online wholesale company, <a href="https://www.mayesh.com/shop?perPage=100&sortBy=Name-ASC&pageNumb=1&date=&is_sales_rep=0&is_e_sales=0&criteria={}&criteriaInt={}&search=&s_search=" target="_blank">Mayesh</a>. The shop contains thousands of flowers, and our goal is to collect comprehensive data including images, prices, and descriptions.</p>
+            
+            <h2>1. Project Overview</h2>
+            <p>The objective of this project is to build an automated web scraping tool that can extract all relevant product information from Mayesh's online shop. The data collected will be stored in a structured format for further analysis and utilization.</p>
+            
+            <h2>2. Tools & Technologies</h2>
+            <ul>
+                <li>
+                    <strong>Programming Language:</strong> 
+                    <a href="https://www.python.org/" target="_blank">Python</a>
+                </li>
+                <li>
+                    <strong>Web Scraping Libraries:</strong>
+                    <ul>
+                        <li>
+                            <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/" target="_blank">Beautiful Soup</a> - For parsing HTML content
+                        </li>
+                        <li>
+                            <a href="https://scrapy.org/" target="_blank">Scrapy</a> - For large-scale scraping with built-in scheduling and data storage
+                        </li>
+                        <li>
+                            <a href="https://selenium.dev/" target="_blank">Selenium</a> - For dynamic content handling and web automation
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Data Storage:</strong>
+                    <ul>
+                        <li>
+                            <a href="https://pandas.pydata.org/" target="_blank">Pandas</a> - For data manipulation and exporting to CSV
+                        </li>
+                        <li>
+                            <a href="https://www.mongodb.com/" target="_blank">MongoDB</a> - For storing data in a NoSQL database
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Development Environment:</strong>
+                    <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a>
+                </li>
+                <li>
+                    <strong>Version Control:</strong>
+                    <a href="https://github.com/" target="_blank">GitHub</a>
+                </li>
+            </ul>
+
+            <h2>3. Installation and Setup</h2>
+            <p>Before starting with the data collection, ensure you have Python installed and set up your environment with the necessary libraries. Here are the quick steps to get started:</p>
+            
+            <h3>3.1 Install Python</h3>
+            <p>Make sure Python is installed on your system. You can download it from <a href="https://www.python.org/downloads/" target="_blank">python.org</a>. After installation, you can check the version by running:</p>
+            <pre><code>python --version</code></pre>
+
+            <h3>3.2 Setting Up a Virtual Environment</h3>
+            <p>It's a good practice to use a virtual environment for your Python projects. Here's how you can set it up:</p>
+            <pre><code>python -m venv myenv
+source myenv/bin/activate  # On Windows use `myenv\\Scripts\\activate`</code></pre>
+
+            <h3>3.3 Install Required Libraries</h3>
+            <p>Install all required Python libraries with pip. Here are the commands to install the main libraries used in this project:</p>
+            <pre><code>pip install Scrapy BeautifulSoup4 selenium pandas pymongo</code></pre>
+
+            <h2>4. Data Collection</h2>
+            <p>For data collection, we utilized a combination of <a href="https://scrapy.org/" target="_blank">Scrapy</a> and <a href="https://selenium.dev/" target="_blank">Selenium</a>. Scrapy was used for its speed and efficiency in scraping static content, while Selenium handled dynamic content loading. The collected data includes:</p>
+            <ul>
+                <li>Product Name</li>
+                <li>Price</li>
+                <li>Image URL</li>
+                <li>Description</li>
+            </ul>
+            <p>We will provide more details on the data collection process in the next page.</p>
+
+            <nav class="pagination">
+                <a href="cornerstone-webscraping-2.html">Next &raquo;</a>
+            </nav>
+        </article>
+    </main>
+
+    <footer>
+        <ul class="social-links">
+            <li><a href="https://github.com/your-profile" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+            <li><a href="https://linkedin.com/in/your-profile" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+            <li><a href="https://twitter.com/your-profile" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+        <p>© [Your Name] 2024 | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
