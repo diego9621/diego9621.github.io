@@ -55,6 +55,41 @@
     .cta-button:hover {
         background-color: #0056b3;
     }
+    /* About Section Styles */
+    .about-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 2em;
+        gap: 2em;
+    }
+    .profile-photo {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .about-text {
+        max-width: 600px;
+        text-align: left;
+    }
+    .about-text p, .about-text ul {
+        margin: 0.5em 0;
+    }
+    .about-text ul {
+        list-style: disc;
+        padding-left: 1em;
+    }
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .about-content {
+            flex-direction: column;
+        }
+        .about-text {
+            text-align: center;
+        }
+    }
     </style>
 
     <!-- Load Non-Critical CSS Asynchronously -->
@@ -105,11 +140,7 @@
         <section id="about">
             <h2>About Me</h2>
             <div class="about-content">
-                <picture>
-                    <source srcset="https://seijmonsbergen.com/wp-content/uploads/2021/10/9618C311-AA12-42FA-85BE-204F41A2CF04-removebg.png" type="image/png">
-                    <img src="https://seijmonsbergen.com/wp-content/uploads/2021/10/9618C311-AA12-42FA-85BE-204F41A2CF04-removebg.png" alt="Diego, Web Developer & Marketeer" class="profile-photo" loading="lazy">
-                </picture>
-            </div>
+                <img src="https://seijmonsbergen.com/wp-content/uploads/2021/10/9618C311-AA12-42FA-85BE-204F41A2CF04-removebg.png" alt="Diego, Web Developer & Marketeer" class="profile-photo" loading="lazy">
                 <div class="about-text">
                     <p>I'm a creative web developer based in Amsterdam, specializing in building and designing exceptional digital experiences. With a passion for both coding and design, I bring ideas to life through modern, user-friendly websites.</p>
                     <ul>
