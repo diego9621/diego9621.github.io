@@ -10,8 +10,74 @@
     <meta property="og:image" content="https://seijmonsbergen.com/wp-content/uploads/2021/10/9618C311-AA12-42FA-85BE-204F41A2CF04-removebg.png">
     <meta property="og:url" content="https://diego9621.github.io/">
     <link rel="icon" href="https://diego9621.github.io/favicon.ico">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Inline Critical CSS -->
+    <style>
+    /* Inline critical CSS here */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 1em;
+    }
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+    }
+    nav ul li {
+        display: inline;
+    }
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
+    .intro {
+        text-align: center;
+        padding: 4em 0;
+    }
+    .cta-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 0.75em 1.5em;
+        border: none;
+        border-radius: 0.25em;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 1em;
+    }
+    .cta-button:hover {
+        background-color: #0056b3;
+    }
+    </style>
+
+    <!-- Load Non-Critical CSS Asynchronously -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+
+    <!-- Preload Fonts and Key Resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N2CPCFLGWB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N2CPCFLGWB');
+    </script>
+
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="pxUf802VTAASjqVZvlySS0cyPYUlPphLGaAmWqLu3V8">
 </head>
 <body>
     <header>
@@ -39,7 +105,10 @@
         <section id="about">
             <h2>About Me</h2>
             <div class="about-content">
-                <img src="https://seijmonsbergen.com/wp-content/uploads/2021/10/9618C311-AA12-42FA-85BE-204F41A2CF04-removebg.png" alt="Diego, Web Developer & Marketeer" class="profile-photo">
+                <picture>
+                    <source srcset="https://seijmonsbergen.com/wp-content/uploads/2021/10/9618C311-AA12-42FA-85BE-204F41A2CF04-removebg.webp" type="image/webp">
+                    <img src="https://seijmonsbergen.com/wp-content/uploads/2021/10/9618C311-AA12-42FA-85BE-204F41A2CF04-removebg.png" alt="Diego, Web Developer & Marketeer" class="profile-photo" loading="lazy">
+                </picture>
                 <div class="about-text">
                     <p>I'm a creative web developer based in Amsterdam, specializing in building and designing exceptional digital experiences. With a passion for both coding and design, I bring ideas to life through modern, user-friendly websites.</p>
                     <ul>
