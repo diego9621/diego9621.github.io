@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common canonical link issues</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google site verification -->
+    <meta name="google-site-verification" content="pxUf802VTAASjqVZvlySS0cyPYUlPphLGaAmWqLu3V8">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N2CPCFLGWB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N2CPCFLGWB');
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <h1>Canonical Links and Common Problems</h1>
+            <p>Canonical links are a way to tell search engines that a specific URL represents the master copy of a page. Using the <code>&lt;link rel=&quot;canonical&quot;&gt;</code> tag helps to prevent problems caused by identical or "duplicate" content appearing on multiple URLs. Essentially, the canonical tag tells search engines which version of a URL you want to appear in search results.</p>
+            
+            <!-- Table of Contents -->
+            <h2>Table of Contents</h2>
+            <ol>
+                <li><a href="#how-canonical-links-appear-in-html">How Canonical links appear in HTML</a></li>
+                <li><a href="#why-are-canonical-links-important">Why Are Canonical Links Important?</a></li>
+                <li><a href="#common-canonical-link-issues">Common Canonical Link Issues in Google Search Console</a></li>
+            </ol>
+             
+        
+            <h2 id="how-canonical-links-appear-in-html">1. How Canonical Links Appear in HTML</h2>
+            <p>A canonical link element looks like this in HTML:</p>
+            <pre><code>&lt;link rel=&quot;canonical&quot; href=&quot;https://www.example.com/preferred-url.html&quot;&gt;</code></pre>
+
+            <h2 id="why-are-canonical-links-important">2. Why Are Canonical Links Important?</h2>
+            <ul>
+                <li><strong>Avoid Duplicate Content:</strong> Search engines like Google often penalize sites for duplicate content because it can appear like an attempt to manipulate search results. By providing a canonical URL, you clarify which version of a page is the primary one and should be indexed.</li>
+                <li><strong>Consolidate Link Signals:</strong> Links that point to several different URLs (all hosting essentially the same content) will have their link signals consolidated to the canonical URL. This can enhance the ranking power of the preferred page because all link equity is directed to one URL.</li>
+                <li><strong>Improve Crawling and Indexing:</strong> By specifying the canonical page, you help search engines spend their crawl budget more wisely. They can avoid crawling and indexing duplicate pages in favor of focusing on the preferred pages.</li>
+            </ul>
+
+            <h2 id="common-canonical-link-issues">3. Common Canonical Link Issues in Google Search Console</h2>
+            <p>Issues related to canonical links can surface in Google Search Console, impacting how your site is viewed and indexed by Google. Here are some common problems and how to fix them:</p>
+
+            <h3>3.1 Google Ignores Your Canonical Tags</h3>
+            <p>Sometimes, Google might choose not to follow your canonical tags if it finds them to be significantly different from the user-declared canonical URL. This can happen due to:</p>
+            <ul>
+                <li><strong>Inconsistent Signals:</strong> If redirects, internal links, sitemaps, and canonical tags send mixed signals about the primary version of a URL, Google might ignore the tag.</li>
+                <li><strong>Similar Content on Supposedly Unique URLs:</strong> If Google deems the content across multiple URLs with different canonical tags too similar, it might consolidate them under one URL it chooses.</li>
+            </ul>
+            <p><strong>Fix:</strong></p>
+            <ul>
+                <li>Ensure consistency across your canonical tags, internal links, sitemaps, and redirects.</li>
+                <li>Use absolute URLs in your canonical tags (e.g., <code>https://www.example.com/page</code> rather than <code>/page</code>).</li>
+                <li>Verify that the content on each canonicalized page is unique enough to warrant separate indexing.</li>
+            </ul>
+
+            <h3>3.2 Multiple Canonical URLs</h3>
+            <p>Specifying multiple canonical URLs for the same page can confuse search engines, leading to indexing issues.</p>
+            <p><strong>Fix:</strong></p>
+            <ul>
+                <li>Inspect the page’s source code and ensure that only one canonical URL is specified.</li>
+                <li>If you use CMS plugins or SEO tools, check their settings to ensure they aren’t automatically adding extra canonical tags.</li>
+            </ul>
+
+            <h3>3.3 Canonical Points to Non-Indexable URLs</h3>
+            <p>If your canonical URL points to a page that is blocked by robots.txt or has a noindex tag, search engines cannot index the preferred URL.</p>
+            <p><strong>Fix:</strong></p>
+            <ul>
+                <li>Make sure the URL specified in the canonical tag is not disallowed by robots.txt.</li>
+                <li>Ensure the canonical URL does not contain a noindex directive.</li>
+            </ul>
+
+            <h3>3.4 Canonical Points to 404 or Redirects</h3>
+            <p>Linking a canonical tag to a non-existent (404) page or a page that redirects can harm your site’s indexing and ranking.</p>
+            <p><strong>Fix:</strong></p>
+            <ul>
+                <li>Regularly check that the URLs specified in canonical tags are live and not redirecting.</li>
+                <li>Use tools like Google Search Console or server log files to find 404 errors and correct the URLs as needed.</li>
+            </ul>
+
+            <h3>3.5 Self-Referential Canonical Tag Issues</h3>
+            <p>While self-referential canonical tags (a page pointing to itself as canonical) are generally good practice, issues arise if the URL specified is different from the actual URL (e.g., due to URL parameters).</p>
+            <p><strong>Fix:</strong></p>
+            <ul>
+                <li>Ensure the canonical tag points to the preferred URL format without unnecessary parameters.</li>
+                <li>Use Search Console’s URL Inspection Tool to view the Google-selected canonical and compare it with your user-declared canonical.</li>
+            </ul>
+
+            <h2>Conclusion</h2>
+            <p>Properly using canonical tags is vital for maintaining a healthy, well-indexed website. Regularly monitor Google Search Console for canonical issues, and address them promptly to ensure the best possible performance in search results. This proactive approach will help consolidate your SEO efforts and improve your site’s overall efficacy.</p>
+        </article>
+    </main>
+
+    <footer>
+        <ul class="social-links">
+            <li><a href="https://github.com/your-profile" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+            <li><a href="https://linkedin.com/in/your-profile" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+            <li><a href="https://twitter.com/your-profile" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+        <p>&copy; [Your Name] 2024 | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
