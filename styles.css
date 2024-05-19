@@ -160,6 +160,12 @@ grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 gap: 1.5rem;
 margin-top: 2rem;
 }
+
+.blog-post img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 .blog-post {
 background-color: #ffefa1;
 padding: 1.5rem;
