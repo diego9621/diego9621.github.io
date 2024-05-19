@@ -164,8 +164,11 @@ margin-top: 2rem;
 .blog-post img {
     width: 100%;
     height: auto;
-    display: block;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
+
 .blog-post {
 background-color: #ffefa1;
 padding: 1.5rem;
