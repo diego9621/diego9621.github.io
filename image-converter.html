@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .input-box, .output-box, #advanced-settings {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .download-link {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+        .download-link:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            position: relative;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            height: auto;
+        }
+        #copyButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            width: 24px;
+            height: 24px;
+        }
+        #copyButton:hover {
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+        pre {
+            overflow-x: auto;
+            margin-top: 20px;
+            max-width: 300px;
+        }
+        .advanced-settings {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .advanced-settings ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .advanced-settings li {
+            margin-bottom: 10px;
+        }
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            margin: 10px 0;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>PNG/JPG to WebP Converter</h1>
+    <input type="file" id="input" accept="image/png, image/jpeg" class="input-box" multiple>
+    <img id="imagePreview" class="image-preview hidden">
+    <input type="text" id="altText" placeholder="Alt text" class="input-box">
+    <input type="number" id="width" placeholder="Width (optional)" class="input-box">
+    <input type="number" id="height" placeholder="Height (optional)" class="input-box">
+    <input type="text" id="caption" placeholder="Caption (optional)" class="input-box">
+    <button onclick="toggleAdvancedSettings()">Advanced Settings</button>
+    <div id="advanced-settings" class="input-box advanced-settings" style="display: none;">
+        <ul>
+            <li><label><input type="checkbox" id="lazyLoad"> Lazy Load</label></li>
+            <li><label><input type="checkbox" id="useAltName"> Use Alt Text as Filename</label></li>
+            <li><label><input type="checkbox" id="responsive"> Create Responsive Images</label></li>
+            <li>
+                <label>
+                    Quality:
+                    <input type="range" id="quality" min="0" max="1" step="0.1" value="0.8">
+                </label>
+            </li>
+        </ul>
+    </div>
+    <button onclick="convert()">Convert to WebP</button>
+    <div id="download-links"></div>
+    <div id="output" class="output-box">
+        <button id="copyButton" onclick="copyToClipboard()">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+                <path d="M225 935q-36 0-60.5-24.5T140 850V305h50v545q0 12 10 23t25 11h400v50H225Zm95-95q-36 0-60.5-24.5T235 755V235q0-36 24.5-60.5T320 150h400q36 0 60.5 24.5T805 235v520q0 36-24.5 60.5T720 840H320Zm0-50h400q12 0 22.5-10.5T753 755V235q0-12-10.5-22.5T720 202H320q-12 0-22.5 10.5T287 235v520q0 12 10.5 22.5T320 790Zm-32 0V212v578Z"/>
+            </svg>
+        </button>
+    </div>
+    <div id="imageSizeInfo" class="input-box">
+        <p id="originalSize">Original Size: </p>
+        <p id="convertedSize">Converted Size: </p>
+        <p id="sizeSaved">Size Saved: </p>
+    </div>
+
+    <script>
+        document.getElementById('input').addEventListener('change', function() {
+            const input = document.getElementById('input').files[0];
+            const img = document.getElementById('imagePreview');
+            img.src = URL.createObjectURL(input);
+            img.classList.remove('hidden');
+
+            // Display original image size
+            const originalSizeElement = document.getElementById('originalSize');
+            const originalSizeInKB = (input.size / 1024).toFixed(2);
+            originalSizeElement.textContent = `Original Size: ${originalSizeInKB} KB`;
+        });
+
+        async function convert() {
+            const input = document.getElementById('input').files;
+            const altText = document.getElementById('altText').value;
+            const width = document.getElementById('width').value;
+            const height = document.getElementById('height').value;
+            const caption = document.getElementById('caption').value;
+            const lazyLoad = document.getElementById('lazyLoad').checked;
+            const useAltName = document.getElementById('useAltName').checked;
+            const responsive = document.getElementById('responsive').checked;
+            const quality = document.getElementById('quality').value;
+
+            if (input.length === 0) {
+                alert('Please select an image file');
+                return;
+            }
+            
+            const downloadLinksContainer = document.getElementById('download-links');
+            downloadLinksContainer.innerHTML = ''; // Clear previous download links
+
+            for (let i = 0; i < input.length; i++) {
+                const img = new Image();
+                img.src = URL.createObjectURL(input[i]);
+                img.onload = async () => {
+                    const resolutions = [400, 800, 1200];
+                    const images = [];
+
+                    for (const res of resolutions) {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = res;
+                        canvas.height = (img.height / img.width) * res;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                        let seoFriendlyName = generateFileName(input[i].name, altText, useAltName, res);
+
+                        canvas.toBlob(blob => {
+                            const url = URL.createObjectURL(blob);
+                            images.push({ url, seoFriendlyName, width: res });
+
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.download = seoFriendlyName;
+                            link.className = 'download-link';
+                            link.textContent = `Download ${seoFriendlyName}`;
+                            downloadLinksContainer.appendChild(link);
+
+                            if (images.length === resolutions.length) {
+                                generateOutput(images, altText, canvas.width, canvas.height, caption, lazyLoad, responsive);
+                            }
+                        }, 'image/webp', quality);
+                    }
+                };
+            }
+        }
+
+        function generateFileName(originalName, altText, useAltName, res) {
+            const baseName = useAltName && altText ? altText.replace(/\s+/g, '-').toLowerCase() : originalName.split('.')[0].replace(/\s+/g, '-');
+            return `${baseName}-${res}w.webp`;
+        }
+
+        function generateOutput(images, altText, width, height, caption, lazyLoad, responsive) {
+            const output = document.getElementById('output');
+            const lazy = lazyLoad ? ' loading="lazy"' : '';
+            const responsiveSrcSet = responsive ? 
+                images.map(img => `${img.seoFriendlyName} ${img.width}w`).join(', ') : '';
+            const sizes = responsive ? 'sizes="(max-width: 600px) 400px, (max-width: 900px) 800px, 1200px"' : '';
+            output.innerHTML = `<button id="copyButton" onclick="copyToClipboard()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
+                    <path d="M225 935q-36 0-60.5-24.5T140 850V305h50v545q0 12 10 23t25 11h400v50H225Zm95-95q-36 0-60.5-24.5T235 755V235q0-36 24.5-60.5T320 150h400q36 0 60.5 24.5T805 235v520q0 36-24.5 60.5T720 840H320Zm0-50h400q12 0 22.5-10.5T753 755V235q0-12-10.5-22.5T720 202H320q-12 0-22.5 10.5T287 235v520q0 12 10.5 22.5T320 790Zm-32 0V212v578Z"/>
+                </svg>
+            </button>
+            <pre><code>&lt;img src="${images[0].seoFriendlyName}" alt="${altText}" width="${width}" height="${height}"${lazy} srcset="${responsiveSrcSet}" ${sizes}&gt;&lt;figcaption&gt;${caption}&lt;/figcaption&gt;</code></pre>`;
+        }
+
+        function copyToClipboard() {
+            const output = document.querySelector('#output code').innerText;
+            navigator.clipboard.writeText(output).then(() => {
+                alert('Copied to clipboard!');
+            }, err => {
+                console.error('Could not copy text: ', err);
+            });
+        }
+
+        function toggleAdvancedSettings() {
+            const advancedSettings = document.getElementById('advanced-settings');
+            advancedSettings.style.display = advancedSettings.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
