@@ -95,25 +95,14 @@
             </div>
         </section>
     </main>
-    <form name="contact" method="POST" netlify>
-        <p>
-          <label>Your Name: <input type="text" name="name" /></label>
-        </p>
-        <p>
-          <label>Your Email: <input type="email" name="email" /></label>
-        </p>
-        <p>
-          <label>Your Role: <select name="role[]" multiple>
-            <option value="leader">Leader</option>
-            <option value="follower">Follower</option>
-          </select></label>
-        </p>
-        <p>
-          <label>Message: <textarea name="message"></textarea></label>
-        </p>
-        <p>
-          <button type="submit">Send</button>
-        </p>
+    <form method="post" action="https://forms.un-static.com/forms/95bf1410e26225fe1b645b1cc26981c027c9b961">
+        <input type="text" name="name" placeholder="Enter your name" required>
+        <input type="email" name="email" placeholder="Enter your e-mail address" required>
+        <textarea name="message" cols="40" rows="15"></textarea>
+        <button type="submit">Send</button>
+        <div class="text-center">
+          <p><small>(Powered by <a rel="nofollow" href="Un-static Forms">Un-static Forms</a>)</small></p>
+        </div>
       </form>
       
     <footer>
