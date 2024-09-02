@@ -1,9 +1,9 @@
-const mailer = require('mailer');
+const nodemailer = require('nodemailer');
 
 exports.handler = async (event, context) => {
     const { name, email, message } = JSON.parse(event.body);
 
-    let transporter = mailer.createTransport({
+    let transporter = nodemailer.createTransport({
         service: 'Outlook',
         auth: {
             user: 'your-email@outlook.com',

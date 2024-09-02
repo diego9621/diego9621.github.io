@@ -144,7 +144,7 @@
                 const data = Object.fromEntries(formData.entries());
 
                 try {
-                    const response = await fetch('/.netlify/functions/contact', {
+                    const response = await fetch('/.netlify/functions/mailer', {
                         method: 'POST',
                         body: JSON.stringify(data),
                         headers: {
