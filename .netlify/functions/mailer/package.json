@@ -1,0 +1,14 @@
+{
+    "name": "mailer",
+    "version": "1.0.0",
+    "description": "Netlify function to handle form submissions and send emails",
+    "main": "mailer.js",
+    "scripts": {
+      "start": "netlify dev"
+    },
+    "dependencies": {
+      "nodemailer": "^6.6.3"
+    },
+    "author": "Your Name",
+    "license": "MIT"
+  }
