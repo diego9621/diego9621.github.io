@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require('mailer');
 
 exports.handler = async (event, context) => {
     const { name, email, message } = JSON.parse(event.body);
